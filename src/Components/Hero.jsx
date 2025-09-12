@@ -1,13 +1,28 @@
-import React from "react";
+import React, { useEffect } from "react";
 import MovieCard from "./MovieCard.jsx";
 import movieImg from "../assets/movie.jpg";
+import { fetchFromApi } from "../utils/axios.js";
+import { randomChar } from "../utils/randomChar.js";
 
 export default function Hero() {
+  const [searchedMovie, setSearchedMovie] = React.useState({});
+
+  useEffect(() => {
+    // fetchFromApi();
+    fetchMovie(randomChar());
+  }, []);
+
+  async function fetchMovie(str) {
+    const movie = await fetchFromApi(str);
+    console.log(movie);
+    setSearchedMovie(movie);
+  }
+
   const heroStyle = {
     background: `linear-gradient(
         rgba(184, 181, 181, 0.6),
         rgba(184, 181, 181, 0.6)
-      ), url(${movieImg}) center / cover no-repeat`,
+      ), url(${searchedMovie.Poster}) center / cover no-repeat`,
     height: "70vh",
     width: "100%",
   };
@@ -30,7 +45,7 @@ export default function Hero() {
           </button>
         </form>
         <div className="hero-result text-dark">
-          <MovieCard />
+          <MovieCard searchedMovie={searchedMovie} />
         </div>
       </div>
     </div>

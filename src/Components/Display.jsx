@@ -13,10 +13,10 @@ export default function Display() {
       </div>
       <p className="counting text-white">8 movies</p>
       <div className="display-moviecard d-flex flex-wrap justify-content-center align-items-center">
+        {/* <MovieCard />
         <MovieCard />
         <MovieCard />
-        <MovieCard />
-        <MovieCard />
+        <MovieCard /> */}
       </div>
     </div>
   );
