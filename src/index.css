@@ -13,6 +13,7 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
   background: rgba(128, 128, 128, 0.664);
 }
+
 .hero {
   /* background: linear-gradient(
       rgba(184, 181, 181, 0.6),
@@ -21,26 +22,71 @@
     url(./assets/movie.jpg) center / cover no-repeat; */
 
   width: 100%;
-  min-height: 80vh;
+  min-height: 70vh;
   margin-top: -8vh;
+
+  position: relative;
 }
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.507);
+  z-index: 0;
+  /* pointer-events: none; */
+}
+
 .hero-container {
-  padding-top: 8vh;
+  position: relative;
+  padding-top: 18vh;
+  inset: 0 auto auto 0;
+  z-index: 2;
+
   /* height: 100%;
   width: 100%; */
   /* border: solid black; */
 }
+/* form */
+.textform-top {
+  width: 100%;
+  height: 100%;
+  /* background: yellow; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.5s;
+}
+.textform-center {
+  /* position: absolute; */
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.356);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  /* top: 160%; */
+  transform: translate(0%, 70%);
+  transition: all 0.5s;
+}
 
 .display-section {
   margin: auto;
-  min-height: 28vh;
+  min-height: 38vh;
   background: grey;
   /* border: solid black; */
 }
+
 .movie-card {
-  background: rgba(54, 52, 52, 0.644);
+  background: rgba(202, 193, 193, 0.507);
   width: 450px;
 }
+
 .movie-card-image {
   /* background: black; */
 
@@ -48,33 +94,71 @@
   justify-content: center;
   align-items: center;
 }
+
 .movie-card-image > img {
   max-height: 260px;
   max-width: 180px;
 }
+
 .movie-card-info {
   max-height: 280px;
   max-width: 180px;
   /* background: yellow; */
 }
+
 .display-moviecard {
   gap: 40px;
 }
+
 @media (max-width: 768px) {
+  .hero {
+    width: 100%;
+    min-height: 80vh;
+    margin-top: -10vh;
+
+    position: relative;
+  }
+  .textform-top > form {
+    width: 350px !important;
+  }
+  .textform-center > form {
+    width: 350px !important;
+  }
   .movie-card {
-    max-width: 450px;
+    max-width: 350px;
     /* display: flex; */
     flex-direction: column;
   }
   .movie-card-image {
-    min-height: 200px;
+    min-height: 130px;
+    max-height: 200px;
     width: 100%;
-    border: black solid;
+
+    /* border: black solid; */
     overflow: hidden;
   }
   .movie-card-image > img {
     height: 100%;
     width: 100%;
     object-fit: cover;
+  }
+  /* all btns inside buttons class  */
+  .buttons > button {
+    width: 48%;
+  }
+}
+
+/* class and Animation for Movie Card */
+.showMovie {
+  transform: scale(1);
+  animation: zoom 0.5s;
+}
+
+@keyframes zoom {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
   }
 }

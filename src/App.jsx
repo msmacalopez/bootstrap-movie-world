@@ -6,16 +6,25 @@ import Hero from "./Components/Hero.jsx";
 import Display from "./Components/Display.jsx";
 
 function App() {
-  const [count, setCount] = useState(0);
+  //MovieList recives movieObjects [+category]
+  const [movieList, setMovieList] = useState([]); //   [{},{},{}]
+
+  function addMovieToTheList(movieObjNcategory) {
+    // setMovieList((prevMovie) => [...prevMovie, movieObjFetch_w_category]);
+    const tempMovie = movieList.filter(
+      (item) => item.imdbID !== movieObjNcategory.imdbID
+    );
+    setMovieList([...tempMovie, movieObjNcategory]);
+  }
 
   return (
     <div className="wrapper">
       {/* NavBar Section  */}
       <NavBar />
       {/* Hero Section  */}
-      <Hero />
+      <Hero addMovieToTheList={addMovieToTheList} />
       {/* Display Section  */}
-      <Display />
+      <Display movieList={movieList} />
     </div>
   );
 }

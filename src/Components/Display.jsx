@@ -1,7 +1,8 @@
 import React from "react";
 import MovieCard from "./MovieCard.JSX";
 
-export default function Display() {
+export default function Display({ movieList }) {
+  console.log(movieList);
   return (
     <div className="display-section p-3">
       <div className="top-buttons mb-1">
@@ -13,10 +14,15 @@ export default function Display() {
       </div>
       <p className="counting text-white">8 movies</p>
       <div className="display-moviecard d-flex flex-wrap justify-content-center align-items-center">
-        {/* <MovieCard />
-        <MovieCard />
-        <MovieCard />
-        <MovieCard /> */}
+        {movieList.map((item, index) => (
+          <div className="movie-" key={index}>
+            <MovieCard
+              searchedMovie={item}
+              // handleOnDelete,
+              // handleOnAddToTheList
+            />
+          </div>
+        ))}
       </div>
     </div>
   );
