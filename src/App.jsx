@@ -36,6 +36,8 @@ function App() {
     const arrayAfterDelete = movieList.filter((item) => item.imdbID !== imdbID);
     confirm("Are you sure you want to delete this movie from the list?") &&
       setMovieList(arrayAfterDelete);
+    //update the list in LocalStorage after deleting
+    storeInLocalSession(arrayAfterDelete);
   }
 
   return (
