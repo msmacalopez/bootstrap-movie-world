@@ -1,13 +1,15 @@
 import React from "react";
-import movieImg from "../assets/movie.jpg";
+// import movieImg from "../assets/movie.jpg";
 
 export default function MovieCard({
   searchedMovie,
   handleOnDelete,
   handleOnAddToTheList,
 }) {
-  //console.log(searchedMovie);
+  console.log("searched Movie", searchedMovie);
+
   const { Poster, Title, imdbRating, Plot, categ } = searchedMovie;
+
   return (
     <div className="movie-card row p-3 rounded-4 d-flex justify-content-center align-items-center">
       <div className="movie-card-image col">
@@ -18,9 +20,9 @@ export default function MovieCard({
         <small>Imdb: {imdbRating}</small>
         <p>{Plot?.slice(0, 80)}...</p>
         {!categ ? (
-          <div className="buttons d-flex justify-content-between">
+          <div className="buttons d-flex justify-content-between gap-2">
             <button
-              className="btn btn-warning px-3"
+              className="btn btn-warning px-3 flex-grow-1"
               onClick={() => {
                 handleOnAddToTheList("drama");
               }}
@@ -28,7 +30,7 @@ export default function MovieCard({
               Drama
             </button>
             <button
-              className="btn btn-info px-3"
+              className="btn btn-info px-3 flex-grow-1"
               onClick={() => {
                 handleOnAddToTheList("action");
               }}
@@ -37,7 +39,10 @@ export default function MovieCard({
             </button>
           </div>
         ) : null}
-        <button onClick={handleOnDelete} className="btn btn-danger w-100 mt-2">
+        <button
+          onClick={() => handleOnDelete(searchedMovie.imdbID)}
+          className="btn btn-danger w-100 mt-2"
+        >
           Delete
         </button>
       </div>

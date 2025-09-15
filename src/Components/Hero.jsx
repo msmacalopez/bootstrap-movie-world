@@ -29,19 +29,32 @@ export default function Hero({ addMovieToTheList }) {
     const newMovie = formData.get("movie_name");
 
     //Only if we enter sth we can search
-    newMovie ? fetchMovie(newMovie) : "null";
+    newMovie ? fetchMovie(newMovie) : null;
   }
 
   async function fetchMovie(str) {
     const movie = await fetchFromApi(str);
     // console.log(movie);
 
-    //only if return a movie with valdi title we change info in screen and Bg
+    //only if return a movie with valid title we change info in screen and Bg
     if (movie.Title.length > 0) {
       setSearchedMovie(movie);
       setBgImg(movie.Poster);
       setSearching(false);
     }
+  }
+
+  function handleOnDelete() {
+    setSearchedMovie({}); //no need this one i think
+    setSearching(true);
+  }
+
+  function handleOnAddToTheList(categ) {
+    //add to the object returned by API a new attributewhich is category:action or drama
+    addMovieToTheList({ ...searchedMovie, mycategory: categ });
+    //Then,same than delete
+    setSearchedMovie({}); //no need this one i think
+    setSearching(true);
   }
 
   const heroStyle = {
@@ -50,18 +63,6 @@ export default function Hero({ addMovieToTheList }) {
         rgba(184, 181, 181, 0.6)
       ), url(${bgImg}) center / cover no-repeat`,
   };
-  function handleOnDelete() {
-    setSearchedMovie({}); //no need this one i think
-    setSearching(true);
-  }
-
-  function handleOnAddToTheList(categ) {
-    //add to the object returned by API a new attributewhich is category:action or drama
-    addMovieToTheList({ ...searchedMovie, categ });
-    //Then,same than delete
-    setSearchedMovie({}); //no need this one i think
-    setSearching(true);
-  }
 
   return (
     <div className="hero" style={heroStyle}>

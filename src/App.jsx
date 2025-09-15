@@ -11,10 +11,18 @@ function App() {
 
   function addMovieToTheList(movieObjNcategory) {
     // setMovieList((prevMovie) => [...prevMovie, movieObjFetch_w_category]);
-    const tempMovie = movieList.filter(
+    const tempMovieList = movieList.filter(
       (item) => item.imdbID !== movieObjNcategory.imdbID
     );
-    setMovieList([...tempMovie, movieObjNcategory]);
+    setMovieList([...tempMovieList, movieObjNcategory]);
+  }
+
+  function handleOnDeleteMovie(imdbID) {
+    // alert("imdbID", imdbID);
+
+    const arrayAfterDelete = movieList.filter((item) => item.imdbID !== imdbID);
+    confirm("Are you sure you want to delete this movie from the list?") &&
+      setMovieList(arrayAfterDelete);
   }
 
   return (
@@ -24,7 +32,10 @@ function App() {
       {/* Hero Section  */}
       <Hero addMovieToTheList={addMovieToTheList} />
       {/* Display Section  */}
-      <Display movieList={movieList} />
+      <Display
+        movieList={movieList}
+        handleOnDeleteMovie={handleOnDeleteMovie}
+      />
     </div>
   );
 }
