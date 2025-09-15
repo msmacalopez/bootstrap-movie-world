@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import MovieCard from "./MovieCard.JSX";
+import MovieCard from "./MovieCard.jsx";
 
 export default function Display({ movieList, handleOnDeleteMovie }) {
   console.log("Movie List", movieList);
