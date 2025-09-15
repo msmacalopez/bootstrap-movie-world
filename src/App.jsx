@@ -1,13 +1,23 @@
-import { useState } from "react";
+import { use, useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import NavBar from "./Components/NavBar.jsx";
 import Hero from "./Components/Hero.jsx";
 import Display from "./Components/Display.jsx";
+import {
+  accessFromLocalSession,
+  storeInLocalSession,
+} from "./utils/localStorage.js";
 
 function App() {
   //MovieList recives movieObjects [+category]
   const [movieList, setMovieList] = useState([]); //   [{},{},{}]
+
+  //UseEffect to load the movieList with the Local Storage data, only at beginning
+  useEffect(() => {
+    const MyList = accessFromLocalSession();
+    MyList?.length > 0 ? setMovieList(MyList) : null;
+  }, []);
 
   function addMovieToTheList(movieObjNcategory) {
     // setMovieList((prevMovie) => [...prevMovie, movieObjFetch_w_category]);
@@ -15,6 +25,9 @@ function App() {
       (item) => item.imdbID !== movieObjNcategory.imdbID
     );
     setMovieList([...tempMovieList, movieObjNcategory]);
+
+    //Using local Storage
+    storeInLocalSession([...tempMovieList, movieObjNcategory]);
   }
 
   function handleOnDeleteMovie(imdbID) {
